@@ -2,34 +2,43 @@
 
 AutoItSetOption("GUIOnEventMode", 1)
 
-Main()
-
 Func HandleGUIEventClose()
-   Exit
+  Exit
 EndFunc
 
 Func Main()
-   Local $green = "0x00ff00"
-   Local $red = "0xff0000"
-   Local $white = "0xffffff"
+  Local $green = "0x00ff00"
+  Local $red = "0xff0000"
+  Local $white = "0xffffff"
+  Local $iterations = 100
 
-   GUICreate("Masher")
-   GUISetOnEvent($GUI_EVENT_CLOSE, "HandleGUIEventClose")
-   GUISetState(@SW_SHOW)
+  ; Show the window.
+  GUICreate("Masher")
+  GUISetOnEvent($GUI_EVENT_CLOSE, "HandleGUIEventClose")
+  GUISetState(@SW_SHOW)
 
-   GUISetBkColor($red)
-   Sleep(10000)
-   GUISetBkColor($white)
-   Sleep(1000)
+  ; Make the window red for 10 seconds.
+  GUISetBkColor($red)
+  Sleep(10000)
+  GUISetBkColor($white)
 
-   For $i = 1 To 100
-	  GUISetBkColor($green)
-	  Send("a")
-	  Sleep(100)
-	  GUISetBkColor($white)
-	  Sleep(1000)
-   Next
+  ; Flash.
+  Sleep(1000)
 
-   GUISetBkColor($red)
-   Sleep(10000)
+  For $i = 1 To $iterations
+    GUISetBkColor($green)
+    Send("a")
+    Sleep(100)
+    GUISetBkColor($white)
+
+    If $i <> $iterations Then Sleep(100)
+  Next
+
+  Sleep(1000) 
+
+  ; Make the window red for 10 seconds.
+  GUISetBkColor($red)
+  Sleep(10000)
 EndFunc
+
+Main()

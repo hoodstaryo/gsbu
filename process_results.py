@@ -14,8 +14,7 @@ def get_color(red, green, blue):
     elif (245 <= red <= 255) and (245 <= green <= 255) and (245 <= blue <= 255):
         return "white"
 
-    else:
-        raise Exception("Invalid color: srgb({}, {}, {})".format(red, green, blue))
+    raise Exception("Invalid color: srgb({}, {}, {})".format(red, green, blue))
 
 
 def parse_result(result):

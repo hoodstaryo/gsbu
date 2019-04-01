@@ -6,10 +6,9 @@ import re
 import subprocess
 
 CLIENT_X = 100
-CLIENT_Y = 1080 - 100
-HOST_X = 1920 - 100
-HOST_Y = 1080 - 100
-PROCS = cpu_count()
+CLIENT_Y = 540
+HOST_X = 1820
+HOST_Y = 980
 
 
 def process_frame(frame):
@@ -47,9 +46,11 @@ def process_frame(frame):
 
 def main():
     frames = glob.iglob("frames/frame*.png")
-    pool = Pool(PROCS)
-    results = pool.map(process_frame, frames)
 
+    number_of_procs = cpu_count()
+    pool = Pool(number_of_procs)
+
+    results = pool.map(process_frame, frames)
     results.sort()
 
     for result in results:
